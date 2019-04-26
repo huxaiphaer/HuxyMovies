@@ -1,6 +1,0 @@
-
-nsquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ª¬Ù»8“©¸Ğ¥-
-usquid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(èÄ”«8“©¸Ğ¥-
-‰"squid:ClassVariableVisibilityCheck"VMake moviesList a static final constant or non-public and provide accessors if needed.(ÒŠ¥ë8“©¸Ğ¥-
-squid:S1186"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(ÎÛæ‡8“©¸Ğ¥-
-ssquid:S00117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(öí¯äüÿÿÿÿ8“©¸Ğ¥-
