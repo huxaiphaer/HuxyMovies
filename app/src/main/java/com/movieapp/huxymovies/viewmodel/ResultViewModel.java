@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModel;
 import android.arch.paging.LivePagedListBuilder;
 import android.arch.paging.PageKeyedDataSource;
 import android.arch.paging.PagedList;
-import android.support.test.espresso.idling.CountingIdlingResource;
 
 import com.movieapp.huxymovies.datasource.MoviesDataFactory;
 import com.movieapp.huxymovies.model.Result;
