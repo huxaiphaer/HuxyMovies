@@ -3,16 +3,23 @@ package com.movieapp.huxymovies.views;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.movieapp.huxymovies.R;
+import com.movieapp.huxymovies.adapter.GenreAdapter;
 import com.movieapp.huxymovies.model.DetailsModal;
 import com.movieapp.huxymovies.utils.Utils;
 import com.movieapp.huxymovies.viewmodel.DetailViewModel;
@@ -102,6 +109,29 @@ public class DetailsActivity extends AppCompatActivity {
         // Setting the OverView.
         TextView overview_txt = findViewById(R.id.overview_txt);
         overview_txt.setText(i.getStringExtra(MOVIE_OVERVIEW));
+
+        //Setting the rating bar.
+        RatingBar rating_bar = findViewById(R.id.rating_bar_details);
+        LayerDrawable stars = (LayerDrawable) rating_bar.getProgressDrawable();
+        stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.rating_bar), PorterDuff.Mode.SRC_ATOP);
+        int roundVal = (int) Math.round(detailsModal.mVoteAverage);
+        rating_bar.setNumStars(roundVal);
+
+        TextView average_txt = findViewById(R.id.average_details_txt);
+        average_txt.setText(String.valueOf(roundVal));
+
+        //Setting the release date.
+        TextView release_date__txt = findViewById(R.id.release_date__txt);
+        release_date__txt.setText(detailsModal.mReleaseDate);
+
+
+        //Set the Recyclerview.
+        RecyclerView recyclerView = findViewById(R.id.genre_rv);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        GenreAdapter genreAdapter = new GenreAdapter(detailsModal.mGenres);
+        recyclerView.setAdapter(genreAdapter);
 
 
     }

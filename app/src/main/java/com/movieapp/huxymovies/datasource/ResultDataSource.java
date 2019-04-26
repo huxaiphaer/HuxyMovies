@@ -32,7 +32,9 @@ public class ResultDataSource extends PageKeyedDataSource<Long, Result> {
 
                         if (response.body() != null) {
 
-                            callback.onResult(response.body().mResults, null, FIRST_PAGE + 1L);
+                            callback.onResult(response.body().getMResults(), null, FIRST_PAGE + 1L);
+
+
                         }
                     }
 
@@ -59,7 +61,7 @@ public class ResultDataSource extends PageKeyedDataSource<Long, Result> {
 
                         if (response.body() != null) {
 
-                            callback.onResult(response.body().mResults, key);
+                            callback.onResult(response.body().getMResults(), key);
 
                         }
                     }
@@ -83,11 +85,11 @@ public class ResultDataSource extends PageKeyedDataSource<Long, Result> {
                     @Override
                     public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {
 
-                        Long key = response.body().mTotalPages > response.body().mPage ? params.key + 1 : null;
+                        Long key = response.body().getMTotalPages() > response.body().getMPage() ? params.key + 1 : null;
 
                         if (response.body() != null) {
 
-                            callback.onResult(response.body().mResults, key);
+                            callback.onResult(response.body().getMResults(), key);
                         }
                     }
 

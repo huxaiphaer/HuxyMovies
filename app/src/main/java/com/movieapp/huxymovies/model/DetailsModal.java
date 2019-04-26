@@ -38,7 +38,7 @@ public class DetailsModal {
     @SerializedName("production_countries")
     private List<ProductionCountry> mProductionCountries;
     @SerializedName("release_date")
-    private String mReleaseDate;
+    public String mReleaseDate;
     @SerializedName("revenue")
     private Long mRevenue;
     @SerializedName("runtime")
@@ -54,7 +54,7 @@ public class DetailsModal {
     @SerializedName("video")
     private Boolean mVideo;
     @SerializedName("vote_average")
-    private Double mVoteAverage;
+    public Double mVoteAverage;
     @SerializedName("vote_count")
     private Long mVoteCount;
 

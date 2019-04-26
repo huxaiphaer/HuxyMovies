@@ -1,10 +1,9 @@
-
 package com.movieapp.huxymovies.model;
 
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
+import java.util.List;
+
 public class Result {
 
     @SerializedName("adult")
@@ -35,5 +34,6 @@ public class Result {
     public Double mVoteAverage;
     @SerializedName("vote_count")
     public Long mVoteCount;
+
 
 }
