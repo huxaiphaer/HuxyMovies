@@ -21,13 +21,11 @@ public class MovieDetailsUnitTest {
 
     MockWebServer mMockWebServer;
 
-
     @Before
     public void setUp() throws Exception {
         mMockWebServer = new MockWebServer();
         mMockWebServer.start(8080);
     }
-
 
 
     /**

@@ -17,6 +17,10 @@ public class NetworkUtility extends Activity {
         this.context = context;
     }
 
+    /**
+     * This method checks for network on the device.
+     * @return
+     */
     public boolean isOnline() {
         try {
             connectivityManager = (ConnectivityManager) context
