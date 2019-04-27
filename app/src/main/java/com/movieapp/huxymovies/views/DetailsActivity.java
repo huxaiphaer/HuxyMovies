@@ -16,11 +16,13 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.movieapp.huxymovies.R;
 import com.movieapp.huxymovies.adapter.GenreAdapter;
 import com.movieapp.huxymovies.model.DetailsModal;
+import com.movieapp.huxymovies.utils.NetworkUtility;
 import com.movieapp.huxymovies.utils.Utils;
 import com.movieapp.huxymovies.viewmodel.DetailViewModel;
 
@@ -87,7 +89,15 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable DetailsModal detailsModal) {
 
-                populateViews(detailsModal);
+                NetworkUtility networkUtility = new NetworkUtility(DetailsActivity.this);
+
+                if (!networkUtility.isOnline()) {
+                    Toast.makeText(DetailsActivity.this, "Please check your internet connection.",
+                            Toast.LENGTH_LONG).show();
+
+                } else {
+                    populateViews(detailsModal);
+                }
             }
         });
 
