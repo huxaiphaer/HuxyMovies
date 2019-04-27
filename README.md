@@ -37,7 +37,7 @@ This project uses **Jacoco** to run both Instrumented and unit tests , below is 
 
 ```
 
-To be able to view the coverage report, navigate to `App/build/Reports/coverage/index.html` , and open the file with the browser to view the test coverage report of the project.
+To be able to view the coverage report, navigate to `app/build/reports/coverage/index.html` , and open the file with the browser to view the test coverage report of the project.
 
 
 ### Languages/Libraries/Architecture Used.
