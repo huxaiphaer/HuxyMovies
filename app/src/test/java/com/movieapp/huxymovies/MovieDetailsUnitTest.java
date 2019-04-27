@@ -5,27 +5,14 @@ import android.arch.lifecycle.LiveData;
 import com.movieapp.huxymovies.model.DetailsModal;
 import com.movieapp.huxymovies.viewmodel.DetailViewModel;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentMatchers;
-
-import okhttp3.mockwebserver.MockWebServer;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class MovieDetailsUnitTest {
-
-
-    MockWebServer mMockWebServer;
-
-    @Before
-    public void setUp() throws Exception {
-        mMockWebServer = new MockWebServer();
-        mMockWebServer.start(8080);
-    }
 
 
     /**
@@ -49,11 +36,6 @@ public class MovieDetailsUnitTest {
         detailViewModel.getHeroes(12L);
         verify(detailViewModel).getHeroes(ArgumentMatchers.eq(12L));
 
-    }
-
-    @After
-    public void tearDown() throws Exception {
-        mMockWebServer.shutdown();
     }
 
 }

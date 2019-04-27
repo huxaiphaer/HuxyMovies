@@ -11,8 +11,5 @@ class MovieApiResponse {
     var mResults: List<Result>? = null
     @SerializedName("total_pages")
     var mTotalPages: Long? = null
-    @SerializedName("total_results")
-    var mTotalResults: Long? = null
-
 
 }

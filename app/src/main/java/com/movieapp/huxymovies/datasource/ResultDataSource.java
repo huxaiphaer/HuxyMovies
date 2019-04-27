@@ -3,16 +3,15 @@ package com.movieapp.huxymovies.datasource;
 import android.arch.paging.PageKeyedDataSource;
 import android.support.annotation.NonNull;
 
+import com.movieapp.huxymovies.datasource.remote.RetrofitClient;
 import com.movieapp.huxymovies.model.MovieApiResponse;
 import com.movieapp.huxymovies.model.Result;
-import com.movieapp.huxymovies.datasource.remote.RetrofitClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.movieapp.huxymovies.utils.Utils.API_KEY;
-import static com.movieapp.huxymovies.utils.Utils.LANGUAGE;
+import static com.movieapp.huxymovies.utils.Utils.INSTANCE;
 
 
 public class ResultDataSource extends PageKeyedDataSource<Long, Result> {
@@ -25,7 +24,7 @@ public class ResultDataSource extends PageKeyedDataSource<Long, Result> {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getMovies(API_KEY, FIRST_PAGE, LANGUAGE)
+                .getMovies(INSTANCE.getAPI_KEY(), FIRST_PAGE, INSTANCE.getLANGUAGE())
                 .enqueue(new Callback<MovieApiResponse>() {
                     @Override
                     public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {
@@ -52,7 +51,7 @@ public class ResultDataSource extends PageKeyedDataSource<Long, Result> {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getMovies(API_KEY, params.key, LANGUAGE)
+                .getMovies(INSTANCE.getAPI_KEY(), params.key, INSTANCE.getLANGUAGE())
                 .enqueue(new Callback<MovieApiResponse>() {
                     @Override
                     public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {
@@ -80,7 +79,7 @@ public class ResultDataSource extends PageKeyedDataSource<Long, Result> {
 
         RetrofitClient.getInstance()
                 .getApi()
-                .getMovies(API_KEY, params.key, LANGUAGE)
+                .getMovies(INSTANCE.getAPI_KEY(), params.key, INSTANCE.getLANGUAGE())
                 .enqueue(new Callback<MovieApiResponse>() {
                     @Override
                     public void onResponse(Call<MovieApiResponse> call, Response<MovieApiResponse> response) {

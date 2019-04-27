@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="movie title"
+                    android:text="@string/loader_text"
                     android:textAlignment="center"
                     android:textColor="@color/textColor"
                     android:textSize="14sp"
@@ -62,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="average"
+                        android:text="@string/loader_text"
                         android:textAlignment="center"
                         android:textColor="@color/red_text" />
 
