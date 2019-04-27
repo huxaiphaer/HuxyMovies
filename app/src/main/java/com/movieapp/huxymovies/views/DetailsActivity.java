@@ -37,7 +37,7 @@ public class DetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_details2);
+        setContentView(R.layout.activity_details);
         Toolbar toolbar = findViewById(R.id.toolbar);
         i = getIntent();
         if (i != null) {
@@ -113,7 +113,7 @@ public class DetailsActivity extends AppCompatActivity {
         // Setting the Movie Poster Image
         ImageView toolbar_image = findViewById(R.id.toolbar_img);
         Glide.with(DetailsActivity.this)
-                .load(Utils.IMAGE_BASE_URL.concat(detailsModal.mPosterPath))
+                .load(Utils.INSTANCE.getIMAGE_BASE_URL().concat(detailsModal.getMPosterPath()))
                 .into(toolbar_image);
 
         // Setting the OverView.
@@ -124,7 +124,7 @@ public class DetailsActivity extends AppCompatActivity {
         RatingBar rating_bar = findViewById(R.id.rating_bar_details);
         LayerDrawable stars = (LayerDrawable) rating_bar.getProgressDrawable();
         stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.rating_bar), PorterDuff.Mode.SRC_ATOP);
-        int roundVal = (int) Math.round(detailsModal.mVoteAverage);
+        int roundVal = (int) Math.round(detailsModal.getMVoteAverage());
         rating_bar.setNumStars(roundVal);
 
         TextView average_txt = findViewById(R.id.average_details_txt);
@@ -132,7 +132,7 @@ public class DetailsActivity extends AppCompatActivity {
 
         //Setting the release date.
         TextView release_date__txt = findViewById(R.id.release_date__txt);
-        release_date__txt.setText(detailsModal.mReleaseDate);
+        release_date__txt.setText(detailsModal.getMReleaseDate());
 
 
         //Set the Recyclerview.
@@ -140,7 +140,7 @@ public class DetailsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        GenreAdapter genreAdapter = new GenreAdapter(detailsModal.mGenres);
+        GenreAdapter genreAdapter = new GenreAdapter(detailsModal.getMGenres());
         recyclerView.setAdapter(genreAdapter);
 
 

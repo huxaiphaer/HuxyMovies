@@ -1,5 +1,42 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
+
+jacoco {
+    toolVersion = "0.7.6.201602180812"
+}
+
+tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}
+
+task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+
+    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
+    def debugTree = fileTree(dir: "$project.buildDir/intermediates/classes/debug", excludes: fileFilter)
+    def mainSrc = "$project.projectDir/src/main/java"
+
+    sourceDirectories = files([mainSrc])
+    classDirectories = files([debugTree])
+    executionData = fileTree(dir: project.buildDir, includes: [
+            'jacoco/testDebugUnitTest.exec', 'outputs/code-coverage/connected/*coverage.ec'
+    ])
+
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['**/android/databinding/**',
+                              'com/android/databinding/library/baseAdapters'])
+        })
+    }
+}
+
+
 
 android {
     compileSdkVersion 28
@@ -29,6 +66,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug {
+            testCoverageEnabled true
+        }
+
     }
 }
 
@@ -56,7 +98,7 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.espressoCore"
     testImplementation("com.squareup.okhttp3:mockwebserver:$rootProject.mockServer")
     annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideLibrary"
-    androidTestCompile "org.mockito:mockito-android:$rootProject.mockitoLibrary"
+    androidTestImplementation "org.mockito:mockito-android:$rootProject.mockitoLibrary"
     testImplementation "org.mockito:mockito-core:$rootProject.mockitoLibrary"
     androidTestImplementation "com.android.support.test:rules:$rootProject.testRunner"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.espressoCore"

@@ -32,7 +32,7 @@ public class ResultAdapter extends PagedListAdapter<Result, ResultAdapter.Result
             new DiffUtil.ItemCallback<Result>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull Result oldItem, @NonNull Result newItem) {
-                    return oldItem.mId == newItem.mId;
+                    return oldItem.getMId() == newItem.getMId();
                 }
 
                 @Override
@@ -67,15 +67,15 @@ public class ResultAdapter extends PagedListAdapter<Result, ResultAdapter.Result
         if (result != null) {
 
             Glide.with(context)
-                    .load(Utils.IMAGE_BASE_URL.concat(result.mPosterPath))
+                    .load(Utils.INSTANCE.getIMAGE_BASE_URL().concat(result.getMPosterPath()))
                     .into(holder.movie_img);
-            holder.title_txt.setText(result.mTitle);
-            holder.average_txt.setText(String.valueOf(result.mVoteAverage));
+            holder.title_txt.setText(result.getMTitle());
+            holder.average_txt.setText(String.valueOf(result.getMVoteAverage()));
 
             // Style the rating bar.
             LayerDrawable stars = (LayerDrawable) holder.rating_bar.getProgressDrawable();
             stars.getDrawable(2).setColorFilter(ContextCompat.getColor(ResultAdapter.this.context, R.color.rating_bar), PorterDuff.Mode.SRC_ATOP);
-            int roundVal= (int) Math.round(result.mVoteAverage);
+            int roundVal= (int) Math.round(result.getMVoteAverage());
             holder.rating_bar.setNumStars(roundVal);
 
 
@@ -84,9 +84,9 @@ public class ResultAdapter extends PagedListAdapter<Result, ResultAdapter.Result
                 @Override
                 public void onClick(View v) {
                     Intent i = new Intent(ResultAdapter.this.context, DetailsActivity.class);
-                    i.putExtra(MOVIE_ID, String.valueOf(result.mId));
-                    i.putExtra(MOVIE_NAME, result.mTitle);
-                    i.putExtra(MOVIE_OVERVIEW,result.mOverview);
+                    i.putExtra(MOVIE_ID, String.valueOf(result.getMId()));
+                    i.putExtra(MOVIE_NAME, result.getMTitle());
+                    i.putExtra(MOVIE_OVERVIEW, result.getMOverview());
                     context.startActivity(i);
 
                 }

@@ -9,8 +9,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.movieapp.huxymovies.utils.Utils.API_KEY;
-import static com.movieapp.huxymovies.utils.Utils.LANGUAGE;
+import static com.movieapp.huxymovies.utils.Utils.INSTANCE;
 
 public class DetailsRepository {
 
@@ -19,7 +18,7 @@ public class DetailsRepository {
         final MutableLiveData<DetailsModal> moviesList = new MutableLiveData<>();
         RetrofitClient.getInstance()
                 .getApi()
-                .getSingleMovie(movie_id, API_KEY, LANGUAGE)
+                .getSingleMovie(movie_id, INSTANCE.getAPI_KEY(), INSTANCE.getLANGUAGE())
                 .enqueue(new Callback<DetailsModal>() {
                     @Override
                     public void onResponse(Call<DetailsModal> call, Response<DetailsModal> response) {

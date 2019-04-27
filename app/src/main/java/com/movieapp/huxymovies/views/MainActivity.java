@@ -26,8 +26,6 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     ProgressBar progressBar;
-    CountingIdlingResource espressoTestIdlingResource = new CountingIdlingResource("Network_Call");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +42,6 @@ public class MainActivity extends AppCompatActivity {
         //Show the progressbar.
         progressBar = findViewById(R.id.pb);
         progressBar.setVisibility(View.VISIBLE);
-
-        espressoTestIdlingResource.increment();
         recyclerView = findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -74,10 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
                     if (results != null) {
 
-                        // Turn off the Progressbar.
-                        progressBar = findViewById(R.id.pb);
-                        progressBar.setVisibility(View.INVISIBLE);
-
                         resultAdapter.submitList(results);
 
                         // Add animation to the RecyclerView.
@@ -88,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
                         recyclerView.setLayoutAnimation(controller);
                         recyclerView.getAdapter().notifyDataSetChanged();
                         recyclerView.scheduleLayoutAnimation();
+
+                        // Turn off the Progressbar.
+                        progressBar = findViewById(R.id.pb);
+                        progressBar.setVisibility(View.INVISIBLE);
                     } else {
 
                         // Turn off the Progressbar.
@@ -103,10 +99,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         recyclerView.setAdapter(resultAdapter);
-        espressoTestIdlingResource.decrement();
     }
 
-    public CountingIdlingResource getEspressoIdlingResourceForMainActivity() {
-        return espressoTestIdlingResource;
-    }
 }
