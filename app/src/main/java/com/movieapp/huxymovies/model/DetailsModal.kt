@@ -2,8 +2,7 @@ package com.movieapp.huxymovies.model
 
 import com.google.gson.annotations.SerializedName
 
-class DetailsModal(@field:SerializedName("title")
-                   var mTitle: String) {
+class DetailsModal {
 
 
     @SerializedName("genres")

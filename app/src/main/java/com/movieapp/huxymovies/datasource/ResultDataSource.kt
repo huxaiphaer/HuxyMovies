@@ -29,7 +29,7 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
                     }
 
                     override fun onFailure(call: Call<MovieApiResponse>, t: Throwable) {
-
+                        print(t)
                     }
                 })
 
@@ -54,7 +54,7 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
                     }
 
                     override fun onFailure(call: Call<MovieApiResponse>, t: Throwable) {
-
+                        print(t)
                     }
                 })
 
@@ -78,7 +78,7 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
                     }
 
                     override fun onFailure(call: Call<MovieApiResponse>, t: Throwable) {
-
+                      print(t)
                     }
                 })
     }
@@ -86,6 +86,6 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
     companion object {
 
 
-        private val FIRST_PAGE: Long = 1
+        private const val FIRST_PAGE: Long = 1
     }
 }

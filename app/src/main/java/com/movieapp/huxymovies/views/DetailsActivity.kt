@@ -16,16 +16,20 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
-
 import com.bumptech.glide.Glide
 import com.movieapp.huxymovies.R
 import com.movieapp.huxymovies.adapter.GenreAdapter
+import com.movieapp.huxymovies.adapter.ResultAdapter.Companion.MOVIE_ID
+import com.movieapp.huxymovies.adapter.ResultAdapter.Companion.MOVIE_NAME
+import com.movieapp.huxymovies.adapter.ResultAdapter.Companion.MOVIE_OVERVIEW
 import com.movieapp.huxymovies.model.DetailsModal
 import com.movieapp.huxymovies.utils.NetworkUtility
 import com.movieapp.huxymovies.utils.Utils
 import com.movieapp.huxymovies.viewmodel.DetailViewModel
+import android.support.v7.widget.GridLayoutManager
 
-import com.movieapp.huxymovies.adapter.ResultAdapter.Companion
+
+
 
 class DetailsActivity : AppCompatActivity() {
 
@@ -37,7 +41,7 @@ class DetailsActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         i = intent
         if (i != null) {
-            toolbar.title = i!!.getStringExtra(Companion.MOVIE_NAME)
+            toolbar.title = i!!.getStringExtra(MOVIE_NAME)
             setSupportActionBar(toolbar)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
@@ -57,8 +61,7 @@ class DetailsActivity : AppCompatActivity() {
         when (item.itemId) {
 
             android.R.id.home -> onBackPressed()
-            else -> {
-            }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -70,13 +73,13 @@ class DetailsActivity : AppCompatActivity() {
     private fun loadDetails() {
 
         i = intent
-        val movie_id = i!!.getStringExtra(Companion.MOVIE_ID).trim { it <= ' ' }
-        val MovieID = java.lang.Long.parseLong(movie_id)
+        val movieId = i!!.getStringExtra(MOVIE_ID).trim { it <= ' ' }
+        val movieIDParser = java.lang.Long.parseLong(movieId)
 
         // Initialize the ViewModel to set data to the UI.
         val detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
-        detailViewModel.getHeroes(MovieID).observe(this, Observer { detailsModal ->
+        detailViewModel.getHeroes(movieIDParser).observe(this, Observer { detailsModal ->
             val networkUtility = NetworkUtility(this@DetailsActivity)
 
             if (!networkUtility.isOnline) {
@@ -95,37 +98,38 @@ class DetailsActivity : AppCompatActivity() {
      *
      * @param detailsModal This is the param for the Model Object
      */
+
     private fun populateViews(detailsModal: DetailsModal) {
 
         // Setting the Movie Poster Image
-        val toolbar_image = findViewById<ImageView>(R.id.toolbar_img)
+        val toolbarImage = findViewById<ImageView>(R.id.toolbar_img)
         Glide.with(this@DetailsActivity)
                 .load(Utils.IMAGE_BASE_URL + detailsModal.mPosterPath)
-                .into(toolbar_image)
+                .into(toolbarImage)
 
         // Setting the OverView.
-        val overview_txt = findViewById<TextView>(R.id.overview_txt)
-        overview_txt.text = i!!.getStringExtra(Companion.MOVIE_OVERVIEW)
+        val overviewTxt = findViewById<TextView>(R.id.overview_txt)
+        overviewTxt.text = i!!.getStringExtra(MOVIE_OVERVIEW)
 
         //Setting the rating bar.
-        val rating_bar = findViewById<RatingBar>(R.id.rating_bar_details)
-        val stars = rating_bar.progressDrawable as LayerDrawable
+        val ratingBar = findViewById<RatingBar>(R.id.rating_bar_details)
+        val stars = ratingBar.progressDrawable as LayerDrawable
         stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.rating_bar), PorterDuff.Mode.SRC_ATOP)
         val roundVal = Math.round(detailsModal.mVoteAverage!!).toInt()
-        rating_bar.numStars = roundVal
+        ratingBar.numStars = roundVal
 
-        val average_txt = findViewById<TextView>(R.id.average_details_txt)
-        average_txt.text = roundVal.toString()
+        val averageTxt = findViewById<TextView>(R.id.average_details_txt)
+        averageTxt.text = roundVal.toString()
 
         //Setting the release date.
-        val release_date__txt = findViewById<TextView>(R.id.release_date__txt)
-        release_date__txt.text = detailsModal.mReleaseDate
+        val releaseDateTxt = findViewById<TextView>(R.id.release_date__txt)
+        releaseDateTxt.text = detailsModal.mReleaseDate
 
 
-        //Set the Recyclerview.
+        //Set the RecyclerView.
         val recyclerView = findViewById<RecyclerView>(R.id.genre_rv)
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
 
         val genreAdapter = GenreAdapter(detailsModal.mGenres!!)
         recyclerView.adapter = genreAdapter

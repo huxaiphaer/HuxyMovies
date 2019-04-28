@@ -11,7 +11,7 @@ class DetailViewModel : ViewModel() {
 
 
     //this is the data that we will fetch asynchronously
-    var moviesList: MutableLiveData<DetailsModal>? = null
+    private var moviesList: MutableLiveData<DetailsModal>? = null
 
     //we will call this method to get the data
     fun getHeroes(movie_id: Long): LiveData<DetailsModal> {

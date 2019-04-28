@@ -17,8 +17,8 @@ import com.movieapp.huxymovies.viewmodel.ResultViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var recyclerView: RecyclerView
-    lateinit var progressBar: ProgressBar
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var progressBar: ProgressBar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -31,13 +31,13 @@ class MainActivity : AppCompatActivity() {
      */
     private fun loadData() {
 
-        //Show the progressbar.
         progressBar = findViewById(R.id.pb)
-        progressBar.visibility = View.VISIBLE
         recyclerView = findViewById(R.id.recyclerview)
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        //Show the progressbar.
+        progressBar.visibility = View.VISIBLE
 
         // Calling the ViewModel
         val resultViewModel = ViewModelProviders.of(this).get(ResultViewModel::class.java)
@@ -59,6 +59,9 @@ class MainActivity : AppCompatActivity() {
 
                 if (results != null) {
 
+                    //Show the progressbar.
+
+                    progressBar.visibility = View.VISIBLE
                     resultAdapter.submitList(results)
 
                     // Add animation to the RecyclerView.

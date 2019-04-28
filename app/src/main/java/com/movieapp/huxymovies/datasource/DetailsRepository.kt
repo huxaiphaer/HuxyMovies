@@ -20,11 +20,12 @@ class DetailsRepository {
                 .enqueue(object : Callback<DetailsModal> {
                     override fun onResponse(call: Call<DetailsModal>, response: Response<DetailsModal>) {
 
-                        moviesList.setValue(response.body())
+                        moviesList.value = response.body()
+
                     }
 
                     override fun onFailure(call: Call<DetailsModal>, t: Throwable) {
-
+                             print(t)
                     }
                 })
 
