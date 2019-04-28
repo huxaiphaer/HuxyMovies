@@ -24,7 +24,7 @@ class Models : TestCase() {
 
         super.setUp()
         movieApiResponse = MovieApiResponse()
-        detailsModal = DetailsModal("")
+        detailsModal = DetailsModal()
         result = Result()
         genre = Genre()
     }

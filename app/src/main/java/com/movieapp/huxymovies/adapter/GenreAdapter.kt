@@ -20,19 +20,19 @@ class GenreAdapter(private val genreList: List<Genre>) : RecyclerView.Adapter<Ge
     override fun onBindViewHolder(genreHolder: GenreHolder, i: Int) {
 
         val dm = genreList[i]
-        genreHolder.genre_txt.text = dm.name
+        genreHolder.genreTxt.text = dm.name
     }
 
     override fun getItemCount(): Int {
         return genreList.size
     }
 
-    class GenreHolder public constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class GenreHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val genre_txt: TextView
+        var genreTxt: TextView = itemView.findViewById(R.id.genre_txt)
 
         init {
-            genre_txt = itemView.findViewById(R.id.genre_txt)
+            genreTxt = itemView.findViewById(R.id.genre_txt)
         }
     }
 }

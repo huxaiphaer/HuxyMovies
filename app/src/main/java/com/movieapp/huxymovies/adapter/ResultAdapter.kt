@@ -38,15 +38,15 @@ class ResultAdapter(private val context: Context) : PagedListAdapter<Result, Res
 
             Glide.with(context)
                     .load(Utils.IMAGE_BASE_URL + result.mPosterPath)
-                    .into(holder.movie_img)
-            holder.title_txt.text = result.mTitle
-            holder.average_txt.text = result.mVoteAverage.toString()
+                    .into(holder.movieImg)
+            holder.titleTxt.text = result.mTitle
+            holder.averageTxt.text = result.mVoteAverage.toString()
 
             // Style the rating bar.
-            val stars = holder.rating_bar.progressDrawable as LayerDrawable
+            val stars = holder.ratingBar.progressDrawable as LayerDrawable
             stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this@ResultAdapter.context, R.color.rating_bar), PorterDuff.Mode.SRC_ATOP)
             val roundVal = Math.round(result.mVoteAverage!!).toInt()
-            holder.rating_bar.numStars = roundVal
+            holder.ratingBar.numStars = roundVal
 
 
 
@@ -63,26 +63,26 @@ class ResultAdapter(private val context: Context) : PagedListAdapter<Result, Res
 
      inner class ResultViewHolder(var root: View) : RecyclerView.ViewHolder(root) {
 
-        var movie_img: ImageView
-        var title_txt: TextView
-        var average_txt: TextView
-        var rating_bar: RatingBar
+        var movieImg: ImageView = root.findViewById(R.id.imageView)
+        var titleTxt: TextView
+        var averageTxt: TextView
+        var ratingBar: RatingBar
 
 
         init {
-            movie_img = root.findViewById(R.id.imageView)
-            title_txt = root.findViewById(R.id.title_txt)
-            average_txt = root.findViewById(R.id.average_txt)
-            rating_bar = root.findViewById(R.id.rating_bar)
+            movieImg = root.findViewById(R.id.imageView)
+            titleTxt = root.findViewById(R.id.title_txt)
+            averageTxt = root.findViewById(R.id.average_txt)
+            ratingBar = root.findViewById(R.id.rating_bar)
         }
 
     }
 
     companion object {
 
-        val MOVIE_ID = "MOVIE_ID"
-        val MOVIE_NAME = "MOVIE_NAME"
-        val MOVIE_OVERVIEW = "MOVIE_OVERVIEW"
+        const val MOVIE_ID = "MOVIE_ID"
+        const val MOVIE_NAME = "MOVIE_NAME"
+        const val MOVIE_OVERVIEW = "MOVIE_OVERVIEW"
 
         private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Result>() {
             override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {

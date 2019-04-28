@@ -5,16 +5,14 @@ import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PageKeyedDataSource
 import android.arch.paging.PagedList
-
+import android.nfc.tech.MifareUltralight.PAGE_SIZE
 import com.movieapp.huxymovies.datasource.MoviesDataFactory
 import com.movieapp.huxymovies.model.Result
-
-import android.nfc.tech.MifareUltralight.PAGE_SIZE
 
 class ResultViewModel : ViewModel() {
 
     var resultPagedList: LiveData<PagedList<Result>>
-    var liveDatSource: LiveData<PageKeyedDataSource<Long, Result>>
+    private var liveDatSource: LiveData<PageKeyedDataSource<Long, Result>>
 
     init {
 

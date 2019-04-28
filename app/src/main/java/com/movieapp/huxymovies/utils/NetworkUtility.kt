@@ -1,13 +1,15 @@
 package com.movieapp.huxymovies.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.util.Log
 
-class NetworkUtility(internal var context: Context) : Activity() {
-    lateinit var connectivityManager: ConnectivityManager
-    var connected = false
+@SuppressLint("Registered")
+class NetworkUtility(private var context: Context) : Activity() {
+    private lateinit  var connectivityManager: ConnectivityManager
+    private var connected = false
 
     /**
      * This method checks for network on the device.

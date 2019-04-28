@@ -20,7 +20,7 @@ class RetrofitClient private constructor() {
     companion object {
 
 
-        private val BASE_URL = "https://api.themoviedb.org/3/"
+        private const val BASE_URL = "https://api.themoviedb.org/3/"
         private var mInstance: RetrofitClient? = null
 
         val instance: RetrofitClient
