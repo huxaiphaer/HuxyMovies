@@ -15,7 +15,7 @@ This is how you can setup your application on your local machine.
  * Ensure that you are having Android studio, then clone the project with the following command :
  
 ```
-https://github.com/huxaiphaer/HuxyMovies.git
+git clone https://github.com/huxaiphaer/HuxyMovies.git
 ```
 * After cloning the repository , open in inside Android studio and wait for it to load. This might take a while but you have to ensure that all the builds finish.
 
