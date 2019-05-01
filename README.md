@@ -17,7 +17,7 @@ This is how you can setup your application on your local machine.
 ```
 git clone https://github.com/huxaiphaer/HuxyMovies.git
 ```
-* After cloning the repository , open in inside Android studio and wait for it to load. This might take a while but you have to ensure that all the builds finish.
+* After cloning the repository , open   Android studio and wait for it to load. This might take a while but you have to ensure that all the builds finish.
 
 * After that click on the play button away from the Right-top corner of Android Studio to run the application.
 
@@ -45,6 +45,7 @@ To be able to view the coverage report, navigate to `app/build/reports/coverage/
 * Kotlin.
 * MVVM (Model View View-Model)
 * Paging Library.
+* Room Database (Local Storage)
 * Xml.
 
 ### Author.
