@@ -15,6 +15,7 @@ import com.movieapp.huxymovies.adapter.ResultAdapter
 import com.movieapp.huxymovies.utils.NetworkUtility
 import com.movieapp.huxymovies.viewmodel.ResultViewModel
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         loadData()
+
     }
 
     /**
@@ -46,44 +48,39 @@ class MainActivity : AppCompatActivity() {
         resultViewModel.resultPagedList.observe(this, Observer { results ->
             val networkUtility = NetworkUtility(this@MainActivity)
 
-            if (!networkUtility.isOnline) {
-
-                Toast.makeText(this@MainActivity, "Please check your internet connection.",
-                        Toast.LENGTH_LONG).show()
+            if (results != null) {
 
                 // Turn off the Progressbar.
                 progressBar = findViewById(R.id.pb)
                 progressBar.visibility = View.INVISIBLE
 
-            } else {
+                resultAdapter.submitList(results)
+                // Add animation to the RecyclerView.
+                val context = recyclerView.context
+                val controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_slide_right)
 
-                if (results != null) {
+                recyclerView.layoutAnimation = controller
+                recyclerView.adapter!!.notifyDataSetChanged()
+                recyclerView.scheduleLayoutAnimation()
 
-                    //Show the progressbar.
+                if (!networkUtility.isOnline) {
 
-                    progressBar.visibility = View.VISIBLE
-                    resultAdapter.submitList(results)
-
-                    // Add animation to the RecyclerView.
-                    val context = recyclerView.context
-                    val controller = AnimationUtils.loadLayoutAnimation(context, R.anim.layout_animation_slide_right)
-
-                    recyclerView.layoutAnimation = controller
-                    recyclerView.adapter!!.notifyDataSetChanged()
-                    recyclerView.scheduleLayoutAnimation()
-
-                    // Turn off the Progressbar.
-                    progressBar = findViewById(R.id.pb)
-                    progressBar.visibility = View.INVISIBLE
-                } else {
-
-                    // Turn off the Progressbar.
-                    progressBar = findViewById(R.id.pb)
-                    progressBar.visibility = View.INVISIBLE
-
-                    Toast.makeText(this@MainActivity, "There are no movies , check your internet connection",
+                    Toast.makeText(this@MainActivity, "Please check your internet connection.",
                             Toast.LENGTH_LONG).show()
+
+                    // Turn off the Progressbar.
+                    progressBar = findViewById(R.id.pb)
+                    progressBar.visibility = View.INVISIBLE
+
+
                 }
+            } else {
+                // Turn off the Progressbar.
+                progressBar = findViewById(R.id.pb)
+                progressBar.visibility = View.INVISIBLE
+
+                Toast.makeText(this@MainActivity, "There are no movies , check your internet connection",
+                        Toast.LENGTH_LONG).show()
             }
         })
 

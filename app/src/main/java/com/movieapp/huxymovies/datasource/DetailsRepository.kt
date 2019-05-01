@@ -12,7 +12,7 @@ import retrofit2.Response
 class DetailsRepository {
 
 
-    fun getSIngleMovies(movie_id: Long): MutableLiveData<DetailsModal> {
+    fun getSingleMovies(movie_id: Long): MutableLiveData<DetailsModal> {
         val moviesList = MutableLiveData<DetailsModal>()
         RetrofitClient.instance
                 .api

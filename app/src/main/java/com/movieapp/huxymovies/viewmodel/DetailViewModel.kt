@@ -29,7 +29,7 @@ class DetailViewModel : ViewModel() {
     private fun loadHeroes(movie_id: Long) {
 
         val detailsRepository = DetailsRepository()
-        moviesList = detailsRepository.getSIngleMovies(movie_id)
+        moviesList = detailsRepository.getSingleMovies(movie_id)
 
     }
 }

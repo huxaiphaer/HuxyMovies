@@ -8,7 +8,7 @@ import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
@@ -26,9 +26,6 @@ import com.movieapp.huxymovies.model.DetailsModal
 import com.movieapp.huxymovies.utils.NetworkUtility
 import com.movieapp.huxymovies.utils.Utils
 import com.movieapp.huxymovies.viewmodel.DetailViewModel
-import android.support.v7.widget.GridLayoutManager
-
-
 
 
 class DetailsActivity : AppCompatActivity() {
@@ -46,7 +43,15 @@ class DetailsActivity : AppCompatActivity() {
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         }
 
-        loadDetails()
+        val networkUtility = NetworkUtility(this@DetailsActivity)
+        if (!networkUtility.isOnline) {
+            Toast.makeText(this@DetailsActivity, "Please check your internet connection.",
+                    Toast.LENGTH_LONG).show()
+        } else {
+
+            loadDetails()
+        }
+
     }
 
 
@@ -80,15 +85,9 @@ class DetailsActivity : AppCompatActivity() {
         val detailViewModel = ViewModelProviders.of(this).get(DetailViewModel::class.java)
 
         detailViewModel.getHeroes(movieIDParser).observe(this, Observer { detailsModal ->
-            val networkUtility = NetworkUtility(this@DetailsActivity)
 
-            if (!networkUtility.isOnline) {
-                Toast.makeText(this@DetailsActivity, "Please check your internet connection.",
-                        Toast.LENGTH_LONG).show()
+            populateViews(detailsModal!!)
 
-            } else {
-                populateViews(detailsModal!!)
-            }
         })
 
     }

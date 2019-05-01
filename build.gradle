@@ -33,6 +33,7 @@ ext {
     archLifecycleVersion = "1.1.0"
     archRoomVersion = "1.0.0"
     archMvvmVersion = "1.0.0"
+    archLifecycleVersion = '1.1.0'
     gsonLibrary="2.4.0"
     glideLibrary ="4.3.1"
     retrofitLibrary = "2.5.0"

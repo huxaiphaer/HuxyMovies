@@ -1,6 +1,7 @@
 package com.movieapp.huxymovies.datasource
 
 import android.arch.paging.PageKeyedDataSource
+import com.movieapp.huxymovies.HuxyMovies
 import com.movieapp.huxymovies.datasource.remote.RetrofitClient
 import com.movieapp.huxymovies.model.MovieApiResponse
 import com.movieapp.huxymovies.model.Result
@@ -21,15 +22,29 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
                 .enqueue(object : Callback<MovieApiResponse> {
                     override fun onResponse(call: Call<MovieApiResponse>, response: Response<MovieApiResponse>) {
 
-                        if (response.body() != null) {
+                        if (response.isSuccessful) {
 
-                            callback.onResult(response.body()!!.mResults!!, null, FIRST_PAGE + 1L)
+                            Thread(Runnable {
+
+                                // First clear the local database.
+                                HuxyMovies.database!!.resultsDao().deleteAllMovies()
+
+                                // Then , Insert into the local database.
+                                HuxyMovies.database!!.resultsDao().insertAllMovies(response.body()!!.mResults!!)
+
+                                callback.onResult(response.body()!!.mResults!!,
+                                        null, FIRST_PAGE + 1L)
+
+                            }).start()
 
                         }
                     }
 
                     override fun onFailure(call: Call<MovieApiResponse>, t: Throwable) {
-                        print(t)
+                        Thread(Runnable {
+                            callback.onResult(HuxyMovies.database!!.resultsDao().getAllMovies()!!,
+                                    null, FIRST_PAGE + 1L)
+                        }).start()
                     }
                 })
 
@@ -74,13 +89,16 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
                         if (response.body() != null) {
 
                             callback.onResult(response.body()!!.mResults!!, key)
+
                         }
                     }
 
                     override fun onFailure(call: Call<MovieApiResponse>, t: Throwable) {
-                      print(t)
+                        print(t)
                     }
                 })
+
+
     }
 
     companion object {
