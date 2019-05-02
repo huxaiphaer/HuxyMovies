@@ -6,6 +6,13 @@ import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Results")
 class Result {
+    constructor(mId: Long?, mOverview: String?, mPosterPath: String?, mTitle: String?, mVoteAverage: Double?) {
+        this.mId = mId
+        this.mOverview = mOverview
+        this.mPosterPath = mPosterPath
+        this.mTitle = mTitle
+        this.mVoteAverage = mVoteAverage
+    }
 
     @PrimaryKey
     @SerializedName("id")

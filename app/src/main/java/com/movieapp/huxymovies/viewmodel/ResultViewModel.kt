@@ -6,7 +6,7 @@ import android.arch.paging.LivePagedListBuilder
 import android.arch.paging.PageKeyedDataSource
 import android.arch.paging.PagedList
 import android.nfc.tech.MifareUltralight.PAGE_SIZE
-import com.movieapp.huxymovies.datasource.MoviesDataFactory
+import com.movieapp.huxymovies.data.MoviesDataFactory
 import com.movieapp.huxymovies.model.Result
 
 class ResultViewModel : ViewModel() {
