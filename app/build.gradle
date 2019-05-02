@@ -46,6 +46,10 @@ android {
     }
 
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "com.movieapp.huxymovies"
@@ -91,6 +95,7 @@ dependencies {
     annotationProcessor  "android.arch.persistence.room:compiler:$rootProject.archRoomVersion"
     kapt "android.arch.persistence.room:compiler:$rootProject.archRoomVersion"
     androidTestImplementation "android.arch.persistence.room:testing:$rootProject.archRoomVersion"
+    androidTestImplementation "android.arch.core:core-testing:1.1.0"
     implementation "android.arch.lifecycle:extensions:$rootProject.archLifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$rootProject.archLifecycleVersion"
 

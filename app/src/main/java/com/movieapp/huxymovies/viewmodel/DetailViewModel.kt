@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 
-import com.movieapp.huxymovies.datasource.DetailsRepository
+import com.movieapp.huxymovies.data.DetailsRepository
 import com.movieapp.huxymovies.model.DetailsModal
 
 class DetailViewModel : ViewModel() {

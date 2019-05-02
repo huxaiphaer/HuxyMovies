@@ -2,7 +2,7 @@ package com.movieapp.huxymovies
 
 import android.app.Application
 import android.arch.persistence.room.Room
-import com.movieapp.huxymovies.datasource.local.ResultsDatabase
+import com.movieapp.huxymovies.data.local.ResultsDatabase
 
 class HuxyMovies : Application() {
 
