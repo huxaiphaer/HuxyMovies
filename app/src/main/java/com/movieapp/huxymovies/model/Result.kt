@@ -14,6 +14,8 @@ class Result {
         this.mVoteAverage = mVoteAverage
     }
 
+    constructor()
+
     @PrimaryKey
     @SerializedName("id")
     var mId: Long? = null
