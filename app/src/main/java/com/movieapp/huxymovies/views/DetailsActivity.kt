@@ -3,18 +3,16 @@ package com.movieapp.huxymovies.views
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.graphics.PorterDuff
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
 import android.view.MenuItem
 import android.widget.ImageView
-import android.widget.RatingBar
-import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.movieapp.huxymovies.R
@@ -22,6 +20,7 @@ import com.movieapp.huxymovies.adapter.GenreAdapter
 import com.movieapp.huxymovies.adapter.ResultAdapter.Companion.MOVIE_ID
 import com.movieapp.huxymovies.adapter.ResultAdapter.Companion.MOVIE_NAME
 import com.movieapp.huxymovies.adapter.ResultAdapter.Companion.MOVIE_OVERVIEW
+import com.movieapp.huxymovies.databinding.ActivityDetailsBinding
 import com.movieapp.huxymovies.model.DetailsModal
 import com.movieapp.huxymovies.utils.NetworkUtility
 import com.movieapp.huxymovies.utils.Utils
@@ -31,10 +30,11 @@ import com.movieapp.huxymovies.viewmodel.DetailViewModel
 class DetailsActivity : AppCompatActivity() {
 
     private var i: Intent? = null
+    private lateinit var activityDetailsBinding: ActivityDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_details)
+        activityDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_details)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         i = intent
         if (i != null) {
@@ -53,7 +53,6 @@ class DetailsActivity : AppCompatActivity() {
         }
 
     }
-
 
     /**
      * This method is helping us to trigger the back button.
@@ -101,35 +100,28 @@ class DetailsActivity : AppCompatActivity() {
     private fun populateViews(detailsModal: DetailsModal) {
 
         // Setting the Movie Poster Image
-        val toolbarImage = findViewById<ImageView>(R.id.toolbar_img)
+        val toolbarImage = activityDetailsBinding.toolbarImg
         Glide.with(this@DetailsActivity)
                 .load(Utils.IMAGE_BASE_URL + detailsModal.mPosterPath)
                 .into(toolbarImage)
 
-        // Setting the OverView.
-        val overviewTxt = findViewById<TextView>(R.id.overview_txt)
-        overviewTxt.text = i!!.getStringExtra(MOVIE_OVERVIEW)
+        // Setting data OverView.
+        activityDetailsBinding.layoutContent!!.overviewTxt.text = i!!.getStringExtra(MOVIE_OVERVIEW)
+        activityDetailsBinding.layoutContent!!.releaseDateTxt.text = detailsModal.mReleaseDate
+        activityDetailsBinding.layoutContent!!.averageDetailsTxt.text = detailsModal.mVoteAverage.toString()
 
-        //Setting the rating bar.
-        val ratingBar = findViewById<RatingBar>(R.id.rating_bar_details)
+        // Setting a RatingBar
+        val ratingBar = activityDetailsBinding.layoutContent!!.ratingBarDetails
         val stars = ratingBar.progressDrawable as LayerDrawable
         stars.getDrawable(2).setColorFilter(ContextCompat.getColor(this, R.color.rating_bar), PorterDuff.Mode.SRC_ATOP)
         val roundVal = Math.round(detailsModal.mVoteAverage!!).toInt()
         ratingBar.numStars = roundVal
 
-        val averageTxt = findViewById<TextView>(R.id.average_details_txt)
-        averageTxt.text = roundVal.toString()
-
-        //Setting the release date.
-        val releaseDateTxt = findViewById<TextView>(R.id.release_date__txt)
-        releaseDateTxt.text = detailsModal.mReleaseDate
-
 
         //Set the RecyclerView.
-        val recyclerView = findViewById<RecyclerView>(R.id.genre_rv)
+        val recyclerView = activityDetailsBinding.layoutContent!!.genreRv
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = GridLayoutManager(this, 3)
-
         val genreAdapter = GenreAdapter(detailsModal.mGenres!!)
         recyclerView.adapter = genreAdapter
 

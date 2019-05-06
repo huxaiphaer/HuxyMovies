@@ -1,7 +1,6 @@
 package com.movieapp.huxymovies.data.local
 
 import android.arch.lifecycle.LiveData
-import android.arch.paging.DataSource
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.OnConflictStrategy
@@ -21,7 +20,7 @@ interface ResultsDao {
     fun deleteAllMovies()
 
     @Query("SELECT * FROM Results")
-    fun selectPaged(): DataSource.Factory<Int, Result>
+    fun getMovies(): List<Result>
 
 }
 

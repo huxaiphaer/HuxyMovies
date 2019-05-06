@@ -1,155 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/bg"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".views.DetailsActivity"
-    tools:showIn="@layout/activity_details">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <data>
+        <variable
+            name="detailsmodal"
+            type="com.movieapp.huxymovies.model.DetailsModal"/>
+    </data>
+
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".views.DetailsActivity"
+        tools:showIn="@layout/activity_details">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
             android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/slabo"
-                android:text="@string/Details"
-                android:textColor="@color/red_text"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/overview_txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/slabo"
-                android:layout_marginTop="5dp"
-                android:text="@string/loader_text"
-                android:textColor="@color/gray_white"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:fontFamily="@font/slabo"
-                android:layout_marginTop="5dp"
-                android:text="@string/ReleaseDate"
-                android:textColor="@color/red_text"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/release_date__txt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:fontFamily="@font/slabo"
-                android:layout_marginTop="5dp"
-                android:text="@string/loader_text"
-                android:textColor="@color/gray_white"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/slabo"
-                android:text="@string/VoteAverage"
-                android:textColor="@color/red_text"
-                android:textSize="16sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RatingBar
-                    android:id="@+id/rating_bar_details"
-                    style="?android:attr/ratingBarStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginTop="9dp"
-                    android:numStars="5"
-                    android:rating="4"
-                    android:stepSize="0.5" />
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/average_details_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/slabo"
+                    android:text="@string/Details"
+                    android:textColor="@color/red_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/overview_txt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:text="@string/loader_text"
+                    android:layout_margin="10dp"
                     android:fontFamily="@font/slabo"
-                    android:textAlignment="center"
-                    android:textColor="@color/gray_white" />
+                    android:layout_marginTop="5dp"
+                    android:text="@{detailsmodal.mOverview}"
+                    android:textColor="@color/gray_white"
+                    android:textSize="14sp" />
+
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="5dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:fontFamily="@font/slabo"
-                android:text="@string/genre"
-                android:layout_marginBottom="6dp"
-                android:textColor="@color/red_text"
-                android:textSize="16sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/bg">
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/genre_rv"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/slabo"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/ReleaseDate"
+                    android:textColor="@color/red_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/release_date__txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:fontFamily="@font/slabo"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/loader_text"
+                    android:textColor="@color/gray_white"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/slabo"
+                    android:text="@string/VoteAverage"
+                    android:textColor="@color/red_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="15dp" />
+                    android:orientation="horizontal">
+
+                    <RatingBar
+                        android:id="@+id/rating_bar_details"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginTop="9dp"
+                        android:numStars="5"
+                        android:rating="4"
+                        android:stepSize="0.5" />
+
+                    <TextView
+                        android:id="@+id/average_details_txt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/loader_text"
+                        android:fontFamily="@font/slabo"
+                        android:textAlignment="center"
+                        android:textColor="@color/gray_white" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/slabo"
+                    android:text="@string/genre"
+                    android:layout_marginBottom="6dp"
+                    android:textColor="@color/red_text"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/bg">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/genre_rv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15dp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
 
-</android.support.v4.widget.NestedScrollView>
+    </android.support.v4.widget.NestedScrollView>
+</layout>

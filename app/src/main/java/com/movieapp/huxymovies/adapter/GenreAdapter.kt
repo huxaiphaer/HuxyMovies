@@ -1,38 +1,38 @@
 package com.movieapp.huxymovies.adapter
 
+import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-
 import com.movieapp.huxymovies.R
+import com.movieapp.huxymovies.databinding.ItemGenreBinding
 import com.movieapp.huxymovies.model.Genre
 
 class GenreAdapter(private val genreList: List<Genre>) : RecyclerView.Adapter<GenreAdapter.GenreHolder>() {
 
+
+    private lateinit var mBinding: ItemGenreBinding
     override fun onCreateViewHolder(viewGroup: ViewGroup, i: Int): GenreHolder {
-        val layoutView = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_genre,
-                viewGroup, false)
-        return GenreHolder(layoutView)
+
+        mBinding = DataBindingUtil.inflate(LayoutInflater.from(viewGroup.context),
+                R.layout.item_genre, viewGroup, false)
+
+        return GenreHolder(mBinding)
     }
 
     override fun onBindViewHolder(genreHolder: GenreHolder, i: Int) {
 
         val dm = genreList[i]
-        genreHolder.genreTxt.text = dm.name
+        genreHolder.itemGenreBinding.genre = dm
     }
 
     override fun getItemCount(): Int {
         return genreList.size
     }
 
-    class GenreHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class GenreHolder constructor(itemView: ItemGenreBinding) : RecyclerView.ViewHolder(itemView.root) {
 
-        var genreTxt: TextView = itemView.findViewById(R.id.genre_txt)
+        var itemGenreBinding: ItemGenreBinding = itemView
 
-        init {
-            genreTxt = itemView.findViewById(R.id.genre_txt)
-        }
     }
 }

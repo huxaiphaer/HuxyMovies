@@ -25,23 +25,21 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
                         if (response.isSuccessful) {
 
                             Thread(Runnable {
-
-                                // First clear the local database.
-                                HuxyMovies.database!!.resultsDao().deleteAllMovies()
-
                                 // Then , Insert into the local database.
-                                HuxyMovies.database!!.resultsDao().insertAllMovies(response.body()!!.mResults!!)
+                                response.body()?.mResults?.let { HuxyMovies.database?.resultsDao()?.insertAllMovies(it) }
 
-                                callback.onResult(response.body()!!.mResults!!,
-                                        null, FIRST_PAGE + 1L)
+                                var getAllMovies = HuxyMovies.database!!.resultsDao().getMovies()
+
+                                callback.onResult(getAllMovies, null, FIRST_PAGE + 1L)
 
                             }).start()
+
 
                         }
                     }
 
                     override fun onFailure(call: Call<MovieApiResponse>, t: Throwable) {
-                       print(t)
+                        print(t)
                     }
                 })
 
@@ -60,7 +58,10 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
 
                         if (response.body() != null) {
 
-                            callback.onResult(response.body()!!.mResults!!, key)
+                            HuxyMovies.database!!.resultsDao().insertAllMovies(response.body()!!.mResults!!)
+                            var getAllMovies = HuxyMovies.database!!.resultsDao().getMovies()
+
+                            callback.onResult(getAllMovies, key)
 
                         }
                     }
@@ -85,7 +86,10 @@ class ResultDataSource : PageKeyedDataSource<Long, Result>() {
 
                         if (response.body() != null) {
 
-                            callback.onResult(response.body()!!.mResults!!, key)
+                            HuxyMovies.database!!.resultsDao().insertAllMovies(response.body()!!.mResults!!)
+                            var getAllMovies = HuxyMovies.database!!.resultsDao().getMovies()
+
+                            callback.onResult(getAllMovies, key)
 
                         }
                     }
